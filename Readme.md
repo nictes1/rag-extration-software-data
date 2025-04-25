@@ -67,6 +67,23 @@ rag-coding/
    {"neo4j":"connected","qdrant":"connected","status":"ok"}
    ```
 
+5. Comprueba el endpoint de Qdrant y Neo4j:
+
+   Qdrant:
+   ```bash
+   # Lista las colecciones (debe devolver [] si no hay colecciones aún)
+   curl -X GET http://localhost:6333/collections
+   ```
+
+   Neo4j:
+
+   ```bash
+   # Ejecuta una consulta Cypher simple (devuelve 42)
+   curl -u neo4j:test1234 \
+     -H "Content-Type: application/json" \
+     -X POST http://localhost:7474/db/neo4j/tx/commit \
+     -d '{"statements":[{"statement":"RETURN 42 AS answer"}]}'
+   ```
 ---
 
 ## 📑 Descripción de Archivos Clave
@@ -78,16 +95,4 @@ rag-coding/
 - **backend/utils/connections.py**: Lógica de conexión a Neo4j (espera activa + reintentos) y Qdrant.
 
 ---
-
-## 📈 Siguientes Pasos
-
-1. **Parser y chunking**: Implementar `utils/parser.py` con Tree‑sitter.
-2. **Generación de embeddings**: Integrar GraphCodeBERT en `utils/embeddings.py`.
-3. **Grafo de conocimiento**: Cargar relaciones en Neo4j.
-4. **RAG & UI**: Orquestar recuperación y respuesta con LangChain o n8n.
-
----
-
-¡Listo! Este README cubre la configuración inicial (Pasos 1 y 2). Para la parte de parser y chunking (Paso 3), crea las tareas correspondientes y sigue iterando.
-
 
